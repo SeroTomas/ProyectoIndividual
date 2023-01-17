@@ -15,7 +15,7 @@ const activityRoute = require('./activities');
 router.use('/load', async(req, res) => {
     try {
         const info = await getInfoToDb();
-        res.status(200).send('ok')
+        res.status(200).send("Los paises fueron cargados a la base de datos")
     } catch (error) {
         res.status(400).send(error.message)
     }
