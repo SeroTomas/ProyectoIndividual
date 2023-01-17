@@ -15,9 +15,9 @@ const activityRoute = require('./activities');
 router.use('/load', async(req, res) => {
     try {
         const info = await getInfoToDb();
-        res.status(200).send("La base de datos fue actualizada")
+        res.status(200).send('ok')
     } catch (error) {
-        res.status(400).send("Algo a salido mal")
+        res.status(400).send(error.message)
     }
 });
 
