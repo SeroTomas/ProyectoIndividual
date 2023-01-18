@@ -1,6 +1,6 @@
 const {Router} = require('express');
 const router = Router();
-const {getCountries, getInfoToDb} = require('../controllers/countries')
+const {getCountries, getInfoToDb, getCountryByPk} = require('../controllers/countries')
 
 router.get('/load', async(req, res) => {
     try {
@@ -16,6 +16,16 @@ router.get('/', async (req, res) => {
     try {
         const result = await getCountries(name);
         res.status(200).json(result);
+    } catch (error) {
+        res.status(400).json({error: error.message})
+    }
+})
+
+router.get('/:id', async (req, res) => {
+    const {id} = req.params;
+    try {
+        const result = await getCountryByPk(id);
+        res.status(200).json(result)
     } catch (error) {
         res.status(400).json({error: error.message})
     }

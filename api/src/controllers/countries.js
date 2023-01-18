@@ -32,7 +32,15 @@ getCountries = async (name) => {
     }
 }
 
+
+getCountryByPk = async (id) => {
+    const country = await Country.findByPk(id);
+    if (!country) throw Error('El pais no existe');
+    return country;
+}
+
 module.exports = {
     getInfoToDb,
-    getCountries
+    getCountries,
+    getCountryByPk
 }
