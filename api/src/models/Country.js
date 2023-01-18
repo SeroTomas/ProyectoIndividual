@@ -34,5 +34,7 @@ module.exports = (sequelize) => {
     population: {
       type: DataTypes.STRING
     }
+  }, {
+    timestamps: false
   });
 };
