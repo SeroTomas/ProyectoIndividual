@@ -11,9 +11,10 @@ module.exports = (sequelize) => {
             primaryKey: true
         },
         name: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            allowNull: false,
         },
-        diffivulty: {
+        difficulty: {
             type:DataTypes.ENUM('1', '2', '3', '4', '5')
         },
         duration:{

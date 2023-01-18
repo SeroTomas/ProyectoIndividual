@@ -9,7 +9,7 @@ const activityRoute = require('./activities');
 // Ejemplo: router.use('/auth', authRouter);
 
 router.use('/countries', countryRoute);
-//router.use('/activities', () =>{activityRoute});
+router.use('/activities', activityRoute);
 
 // ruta para extraer los paises de la API y guardarlos en la base de datos
 

@@ -1,13 +1,13 @@
 const axios = require('axios');
 const { Op } = require('sequelize');
-const { Country } = require('../db.js')
+const { Country } = require('../db')
 
 
 getInfoToDb = async () => {
     const apiInfo = await axios('https://restcountries.com/v3/all');
     const cleanInfo = apiInfo.data.map(c => {
         return {
-            id: c.cca2,
+            id: c.cca3,
             name: c.name.common,
             flag: c.flags[0],
             continent: c.continents ? c.continents.join(", ") : 'Unknown',
