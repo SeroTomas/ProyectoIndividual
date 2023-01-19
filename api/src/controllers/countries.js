@@ -1,6 +1,6 @@
 const axios = require('axios');
 const { Op } = require('sequelize');
-const { Country } = require('../db')
+const { Country, Activity } = require('../db')
 
 
 getInfoToDb = async () => {
@@ -24,17 +24,31 @@ getInfoToDb = async () => {
 
 getCountries = async (name) => {
     if (name) {
-        const nameCountry = await Country.findOne({ where: { name: { [Op.iLike]: `%${name}%` } } })
+        const nameCountry = await Country.findOne({
+            where: { name: { [Op.iLike]: `%${name}%` } },
+            attributes: ['id', 'name', 'flag', 'continent']
+        })
         return nameCountry;
-    } else{
-        const countries = await Country.findAll()
+    } else {
+        const countries = await Country.findAll({
+            attributes: ['id', 'name', 'flag', 'continent']
+        })
         return countries;
     }
 }
 
 
 getCountryByPk = async (id) => {
-    const country = await Country.findByPk(id);
+    const country = await Country.findByPk(id,
+        {
+            include: {
+                model: Activity,
+                attributes: ['id', 'name', 'difficulty', 'duration', 'season'],
+                through: {
+                    attributes: [],
+                }
+            }
+        });
     if (!country) throw Error('El pais no existe');
     return country;
 }
