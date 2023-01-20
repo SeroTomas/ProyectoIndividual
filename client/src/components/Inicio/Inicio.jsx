@@ -3,13 +3,9 @@ import './inicio.css';
 
 const Inicio = (props) => {
     return (
-        <>
-            <div className='inicio'>
-                <h1>Estoy en Inicio</h1>
-
-                <Cards />
-            </div>
-        </>
+        <div className='inicio'>
+            <Cards/>
+        </div>
     )
 }
 

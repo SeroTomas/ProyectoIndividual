@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const GET_COUNTRIES = "GET_COUNTRIES";
-const GET_NAMED_COUNTRY = "GET_NAMED_COUNTRY";
+export const GET_COUNTRIES = "GET_COUNTRIES";
+export const GET_NAMED_COUNTRY = "GET_NAMED_COUNTRY";
 
 
-const getCountries = () => {
+export const getCountries = () => {
     return async (dispatch) => {
         try {
             const response = await axios.get('http://localhost:3001/countries');
@@ -15,7 +15,7 @@ const getCountries = () => {
     }
 };
 
-const getNamedCountry = (name) => {
+export const getNamedCountry = (name) => {
     return async (dispatch) => {
         try {
             const response = await axios.get(`http://localhost:3001/countries?name=${name}`);

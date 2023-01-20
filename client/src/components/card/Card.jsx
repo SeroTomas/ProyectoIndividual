@@ -1,8 +1,17 @@
-const Card = (props) => {
+import './card.css';
+
+const Card = ({id, name, flag, continent}) => {
     return (
-        <>
-            <h3>esto es una card</h3>
-        </>
+        <div className="card-container">
+            <div className="img-container">
+                <img src={flag} alt={`Bandera de ${name}`}/>
+            </div>
+            <div className="info-container">
+                <h2>{id}</h2>
+                <h3>{name}</h3>
+                <h3>{continent}</h3>
+            </div>
+        </div>
     )
 }
 

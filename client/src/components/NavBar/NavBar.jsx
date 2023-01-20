@@ -1,3 +1,5 @@
+
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import './navBar.css';
@@ -9,7 +11,7 @@ const NavBar = (props) => {
     return (
         <nav className="navigation">
             <div  className="brand-name">
-                <Link> <h1>Countries</h1> </Link>
+                <Link to={'/countries/inicio'}> <h1>Countries</h1> </Link>
             </div>
             <div>
                 <button className="hamburger" onClick={() => { setIsNavExpanded(!isNavExpanded) }}>
