@@ -24,7 +24,7 @@ getInfoToDb = async () => {
 
 getCountries = async (name) => {
     if (name) {
-        const nameCountry = await Country.findOne({
+        const nameCountry = await Country.findAll({
             where: { name: { [Op.iLike]: `%${name}%` } },
             attributes: ['id', 'name', 'flag', 'continent']
         })

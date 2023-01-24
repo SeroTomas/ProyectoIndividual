@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-export const GET_COUNTRIES = "GET_COUNTRIES";
-export const GET_NAMED_COUNTRY = "GET_NAMED_COUNTRY";
-
+// importamos las constantes necesarias
+import { GET_COUNTRIES, GET_NAMED_COUNTRY } from '../Const/index';
+//
 
 export const getCountries = () => {
     return async (dispatch) => {
@@ -25,4 +25,3 @@ export const getNamedCountry = (name) => {
         }
     }
 };
-
