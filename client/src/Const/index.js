@@ -5,7 +5,7 @@ export const GET_NAMED_COUNTRY = "GET_NAMED_COUNTRY";
 
 
 // Dependencias Handlers
-export const ALPHA_FILTER = "ALPHA_FILTER";
+export const ORDER_BY_NAME = "ORDER_BY_NAME";
 
 
 

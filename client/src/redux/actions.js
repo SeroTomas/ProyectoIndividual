@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // importamos las constantes necesarias
-import { GET_COUNTRIES, GET_NAMED_COUNTRY } from '../Const/index';
+import { GET_COUNTRIES, GET_NAMED_COUNTRY, ORDER_BY_NAME } from '../Const/index';
 //
 
 export const getCountries = () => {
@@ -25,3 +25,16 @@ export const getNamedCountry = (name) => {
         }
     }
 };
+
+export const orderByName = (payload) => {
+    return{
+        type: ORDER_BY_NAME,
+        payload
+    }
+}
+
+export function orderName(a, b) {
+    if(a.name < b.name) return -1
+    if(b.name < a.name) return 1 
+    return 0
+  }

@@ -2,31 +2,17 @@
 import './cards.css';
 
 //importamos dependencias necesarias
-import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import { getCountries } from '../../redux/actions';
-
+import { useSelector } from 'react-redux';
 
 // importamos componentes necesarios
-import SearchBar from '../SearchBar/SearchBar';
 import Card from '../card/Card';
 
-
-const Cards = (props) => {
-
-    const dispatch = useDispatch();
-    const countries = useSelector(state => state.countries);
-
-
-    useEffect(() => {
-        dispatch(getCountries())
-    }, [dispatch])
-
+const Cards = () => {
+    const countries = useSelector(state => state.countries)
 
     return (
         <>
             <h1>esto es cards</h1>
-            <SearchBar />
 
             <div className='cards-container'>
                 {
@@ -41,7 +27,6 @@ const Cards = (props) => {
                             />
                         )
                     })
-
                 }
 
             </div>

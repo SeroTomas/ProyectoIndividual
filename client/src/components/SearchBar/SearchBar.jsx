@@ -5,10 +5,11 @@ import { useDispatch } from "react-redux"
 import { getNamedCountry } from "../../redux/actions";
 
 
-const SearchBar = (props) => {
+const SearchBar = () => {
 
     const dispatch = useDispatch()
     const [search, setSearch] = useState("");
+
 
 
     const handlerSearch = (event) => {
@@ -28,9 +29,8 @@ const SearchBar = (props) => {
     return (
         <>
             <div className="search-container">
-                <form onSubmit={handlerSearch}>
+                <form onChange={handlerSearch}>
                     <input type="text" placeholder="Buscar..." onChange={handlerInput} value={search} />
-                    <button type="submit">Buscar</button>
                 </form>
             </div>
         </>
