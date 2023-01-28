@@ -14,7 +14,7 @@ getInfoToDb = async () => {
             capital: c.capital ? c.capital.join(", ") : 'Unknown',
             subregion: c.subregion ? c.subregion : 'Unknown',
             area: c.area ? Math.round(c.area) : 'Unknown',
-            population: c.population ? c.population : 'Unknown'
+            population: c.population 
         }
     })
 
@@ -26,12 +26,12 @@ getCountries = async (name) => {
     if (name) {
         const nameCountry = await Country.findAll({
             where: { name: { [Op.iLike]: `%${name}%` } },
-            attributes: ['id', 'name', 'flag', 'continent']
+            attributes: ['id', 'name', 'flag', 'continent', 'population']
         })
         return nameCountry;
     } else {
         const countries = await Country.findAll({
-            attributes: ['id', 'name', 'flag', 'continent']
+            attributes: ['id', 'name', 'flag', 'continent', 'population']
         })
         return countries;
     }
