@@ -30,7 +30,7 @@ const NavBar = (props) => {
                         <Link to={'/countries/Inicio'}> <p>Inicio</p> </Link>
                     </li>
                     <li>
-                        <Link to={'/contries/form'}> <p>Crear actividad</p> </Link>
+                        <Link to={'/countries/form'}> <p>Crear actividad</p> </Link>
                     </li>
                 </ul>
             </div>

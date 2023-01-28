@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // importamos las constantes necesarias
-import { GET_COUNTRIES, GET_NAMED_COUNTRY, ORDER_BY_NAME } from '../Const/index';
+import { FILTER_BY_CONTINENT, GET_COUNTRIES, GET_NAMED_COUNTRY, ORDER_BY_NAME, ORDER_BY_POPULATION, ACT_TO_STATE } from '../Const/index';
 //
 
 export const getCountries = () => {
@@ -19,22 +19,49 @@ export const getNamedCountry = (name) => {
     return async (dispatch) => {
         try {
             const response = await axios.get(`http://localhost:3001/countries?name=${name}`);
-            dispatch({type: GET_NAMED_COUNTRY, payload: response.data});
+            dispatch({ type: GET_NAMED_COUNTRY, payload: response.data });
         } catch (error) {
             console.log(error.message)
         }
     }
 };
 
+export const postActivity = (activity) => {
+    return async (dispatch) => {
+
+        try {
+           const response = await axios.post('http://localhost:3001/activities', activity)
+            
+        } catch (error) {
+
+        }
+    }
+}
+
+export const getActToState = (payload) => {
+    return {
+        type: ACT_TO_STATE,
+        payload
+    }
+}
+
 export const orderByName = (payload) => {
-    return{
+    return {
         type: ORDER_BY_NAME,
         payload
     }
 }
 
-export function orderName(a, b) {
-    if(a.name < b.name) return -1
-    if(b.name < a.name) return 1 
-    return 0
-  }
+export const orderByPopulation = (payload) => {
+    return {
+        type: ORDER_BY_POPULATION,
+        payload
+    }
+}
+
+export const filterByContinent = (payload) => {
+    return {
+        type: FILTER_BY_CONTINENT,
+        payload
+    }
+}

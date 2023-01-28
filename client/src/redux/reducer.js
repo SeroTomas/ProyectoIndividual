@@ -1,10 +1,12 @@
-import { GET_COUNTRIES, GET_NAMED_COUNTRY, ORDER_BY_NAME, A_Z } from "../Const/index";
+import { ACT_TO_STATE,GET_COUNTRIES, GET_NAMED_COUNTRY, ORDER_BY_NAME, A_Z, ASCENDENTE, ORDER_BY_POPULATION, FILTER_BY_CONTINENT, auxSortPopulation, auxSortName, auxFilterContinent, SEARCH_CONT_COUNTRY } from "../Const/index";
 
 
 
 export const initialState = {
     dbCountries: [],
-    countries: []
+    countries: [],
+    continent: [],
+    activities: [],
 
 }
 
@@ -15,32 +17,64 @@ export default function reducer(state = initialState, { type, payload }) {
                 ...state,
                 dbCountries: payload,
                 countries: payload,
-                filterbycontinent: payload,
-                filterbyactivity: payload
+                activity: payload
             }
-        //SearchBar 
+
+        case FILTER_BY_CONTINENT:
+
+            return {
+                ...state,
+                continent: auxFilterContinent(state.dbCountries, payload)
+            }
 
         case GET_NAMED_COUNTRY:
             return {
                 ...state,
-                countries: payload
+                countries: payload,
             }
 
+
         case ORDER_BY_NAME:
-            let orderCountries = payload === A_Z ? state.countries.slice().sort((a, b) => {
-                if (a.name < b.name) return -1
-                if (b.name < a.name) return 1
-                return 0
-            }) :
-                state.countries.slice().sort((a, b) => {
-                if (a.name < b.name) return 1
-                if (b.name < a.name) return -1
-                return 0
-            })
+            if (payload === A_Z) {
+
+                return {
+                    ...state,
+                    countries: state.countries.slice().sort(auxSortName),
+                    continent: state.continent.slice().sort(auxSortName)
+                }
+            } else {
+                return {
+                    ...state,
+                    countries: state.countries.slice().sort(auxSortName).reverse(),
+                    continent: state.continent.slice().sort(auxSortName).reverse()
+
+                }
+            }
+
+
+        case ORDER_BY_POPULATION:
+            if (payload === ASCENDENTE) {
+
+                return {
+                    ...state,
+                    countries: state.countries.slice().sort(auxSortPopulation),
+                    continent: state.continent.slice().sort(auxSortPopulation)
+                }
+            } else {
+                return {
+                    ...state,
+                    countries: state.countries.slice().sort(auxSortPopulation).reverse(),
+                    continent: state.continent.slice().sort(auxSortPopulation).reverse()
+                }
+            }
+        
+        case ACT_TO_STATE:
             return {
                 ...state,
-                countries: orderCountries
+                activities: [...state.activities, payload]
             }
+
+
 
         default:
             return {

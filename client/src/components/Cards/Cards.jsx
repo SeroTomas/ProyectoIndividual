@@ -9,6 +9,7 @@ import Card from '../card/Card';
 
 const Cards = () => {
     const countries = useSelector(state => state.countries)
+    const continent = useSelector(state => state.continent);
 
     return (
         <>
@@ -16,7 +17,7 @@ const Cards = () => {
 
             <div className='cards-container'>
                 {
-                    countries?.map((country) => {
+                    continent.length ? continent?.map((country) => {
                         return (
                             <Card
                                 key={country.id}
@@ -25,9 +26,19 @@ const Cards = () => {
                                 flag={country.flag}
                                 continent={country.continent}
                             />
-                        )
-                    })
-                }
+                        )}) 
+                        : countries?.map((country) => {
+                            return (
+                                <Card
+                                    key={country.id}
+                                    id={country.id}
+                                    name={country.name}
+                                    flag={country.flag}
+                                    continent={country.continent}
+                                />
+                            )
+                        })
+                    }
 
             </div>
         </>

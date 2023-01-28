@@ -14,6 +14,7 @@ const SearchBar = () => {
 
     const handlerSearch = (event) => {
         event.preventDefault();
+
     }
 
     const handlerInput = (event) => {
@@ -21,15 +22,16 @@ const SearchBar = () => {
         setSearch(value);
     }
 
-    useEffect(()=>{
-        dispatch(getNamedCountry(search));
+
+    useEffect(() => {
+        dispatch(getNamedCountry(search))
     }, [dispatch, search])
 
 
     return (
         <>
             <div className="search-container">
-                <form onChange={handlerSearch}>
+                <form onChange={handlerSearch} onSubmit={(event) => { event.preventDefault() }}>
                     <input type="text" placeholder="Buscar..." onChange={handlerInput} value={search} />
                 </form>
             </div>
