@@ -1,33 +1,33 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { auxSortName, validate } from "../../Const";
-import { getCountries, getActToState } from "../../redux/actions";
+import { getCountries, getActToState, postActivity, resetActivities, getActivities } from "../../redux/actions";
 import ActivityCard from "../ActivityCard/ActivityCard";
 
 const Form = () => {
 
     const dispatch = useDispatch();
     const dbCountries = useSelector(state => state.dbCountries).sort(auxSortName);
+    const createActivities = useSelector(state => state.createActivities)
     const activities = useSelector(state => state.activities)
-
-    const [form, setForm] = useState({
+    console.log(activities)
+    const resetedForm = {
         name: '',
-        difficulty: 0,
-        duration: '',
-        season: '',
+        difficulty: '-',
+        duration: '-',
+        season: '-',
         countries: []
-    })
+    }
+    const [form, setForm] = useState(resetedForm)
+
 
     const [error, setError] = useState({})
 
     const handlerInput = (event) => {
-
         let property = event.target.name;
         let value = event.target.value;
-        
         // si property es countries agregamos el pais seleccionado al array.
         //sino se setea normalmente.
-
         property === "countries" ? setForm({
             ...form,
             countries: [...form.countries, value]
@@ -35,16 +35,12 @@ const Form = () => {
             ...form,
             [property]: value
         })
-
         // implementamos las validaciones
-
         setError(validate({
             ...form,
             [property]: value
         }))
-
     }
-
     //generamos un filter para borrar algun pais.
     const handlerclick = (id) => {
         setForm({
@@ -70,34 +66,31 @@ const Form = () => {
             return alert('Debe llenar los campos')
         }
         //buscamos si se esta tratando de cargar una actividad con mismo nombre
-        let repeat = activities.filter(activity => activity.name === form.name);
+        let repeat = createActivities.filter(activity => activity.name === form.name);
+        //let repeatAct = activities.filter(activity => activity.name === form.name)
 
         if (!repeat.length) {
             dispatch(getActToState(form))
-            setForm({
-                name: '',
-                difficulty: '-',
-                duration: '-',
-                season: '-',
-                countries: []
-            })
-
+            setForm(resetedForm)
         } else {
-            alert('la actividad esta repetida')
-            setForm({
-                name: '',
-                difficulty: '-',
-                duration: '-',
-                season: '-',
-                countries: []
-            })
+            alert('la actividad esta repetida o ya fue creada')
+            setForm(resetedForm)
         }
+    }
+    //cargamos las actividades a la base de datos
+    const submitActivities = () => {
+        dispatch(postActivity(createActivities))
+        dispatch(getActivities())
+        dispatch(resetActivities())
     }
 
     useEffect(() => {
         dispatch(getCountries());
-        setError(validate({ ...form }))
     }, [dispatch])
+
+    useEffect(() => {
+        setError(validate(form))
+    }, [dispatch, form])
 
     return (
         <>
@@ -111,9 +104,11 @@ const Form = () => {
                     <label htmlFor="difficulty">Dificultad:
                         <select name="difficulty" onChange={handlerInput}>
                             <option value="-">Seleccione una Dificultad</option>
+                            <option value="muy facil">Muy facil</option>
                             <option value="facil">Facil</option>
-                            <option value="moderada">Moderada</option>
+                            <option value="normal">Normal</option>
                             <option value="dificil">Dificil</option>
+                            <option value="muy dificil">Muy dificil</option>
                         </select>
                         {error.difficulty && <p>{error.difficulty}</p>}
                     </label>
@@ -161,6 +156,7 @@ const Form = () => {
             <div>
                 <h2>actividades que quiere crear</h2>
                 <ActivityCard />
+                <button onClick={submitActivities}>Crear</button>
             </div>
 
 

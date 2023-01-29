@@ -1,4 +1,4 @@
-import { ACT_TO_STATE,GET_COUNTRIES, GET_NAMED_COUNTRY, ORDER_BY_NAME, A_Z, ASCENDENTE, ORDER_BY_POPULATION, FILTER_BY_CONTINENT, auxSortPopulation, auxSortName, auxFilterContinent, SEARCH_CONT_COUNTRY } from "../Const/index";
+import { GET_ACTIVITIES,RESET_ACTIVITIES,ACT_TO_STATE,GET_COUNTRIES, GET_NAMED_COUNTRY, ORDER_BY_NAME, A_Z, ASCENDENTE, ORDER_BY_POPULATION, FILTER_BY_CONTINENT, auxSortPopulation, auxSortName, auxFilterContinent } from "../Const/index";
 
 
 
@@ -6,7 +6,8 @@ export const initialState = {
     dbCountries: [],
     countries: [],
     continent: [],
-    activities: [],
+    createActivities: [],
+    activities : []
 
 }
 
@@ -17,7 +18,12 @@ export default function reducer(state = initialState, { type, payload }) {
                 ...state,
                 dbCountries: payload,
                 countries: payload,
-                activity: payload
+            }
+
+        case GET_ACTIVITIES:
+            return{
+                ...state,
+                activities:[...state.activities, payload]
             }
 
         case FILTER_BY_CONTINENT:
@@ -71,10 +77,14 @@ export default function reducer(state = initialState, { type, payload }) {
         case ACT_TO_STATE:
             return {
                 ...state,
-                activities: [...state.activities, payload]
+                createActivities: [...state.createActivities, payload]
             }
 
-
+        case RESET_ACTIVITIES:
+            return{
+                ...state, 
+                createActivities: []
+            }
 
         default:
             return {

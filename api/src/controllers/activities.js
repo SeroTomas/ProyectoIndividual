@@ -2,56 +2,31 @@
 const { Activity, Country } = require('../db');
 
 getNewActivity = async (info) => {
-    if (Array.isArray(info)) {
-        await info.forEach(async (act) => {
-            const { name, difficulty, duration, season, countryId } = act;
-            const newActivity = await Activity.create({
-                name,
-                difficulty,
-                duration,
-                season
-            });
 
-            if (countryId.length > 1) {
-
-                await countryId.forEach(element => {
-                    newActivity.addCountry(element);
-                });
-
-            } else {
-
-                await newActivity.addCountry(countryId[0]);
-
-            }
-        });
-
-        return info
-
-    } else {
-
-        const { name, difficulty, duration, season, countryId } = info;
-
+    await info.forEach(async (act) => {
+        const { name, difficulty, duration, season, countries } = act;
         const newActivity = await Activity.create({
             name,
             difficulty,
             duration,
             season
         });
+        
 
-        if (countryId.length > 1) {
+        if (countries.length > 1) {
 
-            await countryId.forEach(element => {
+            await countries.forEach(element => {
                 newActivity.addCountry(element);
             });
 
         } else {
 
-            await newActivity.addCountry(countryId[0]);
+            await newActivity.addCountry(countries[0]);
 
         }
+    });
 
-        return newActivity
-    }
+    return info
 }
 
 getActivities = async () => {

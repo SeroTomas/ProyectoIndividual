@@ -4,10 +4,10 @@ import { useSelector } from "react-redux"
 
 const ActivityCard = (props) => {
 
-    const activities = useSelector(state => state.activities);
+    const createActivities = useSelector(state => state.createActivities);
     return (
         <>
-            {activities?.map(activity => {
+            {createActivities?.map(activity => {
                 return (
                     <div key={activity.name}>
                         <h3>{activity.name}</h3>

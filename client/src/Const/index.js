@@ -1,7 +1,9 @@
 // ****ACTIONS****
 export const GET_COUNTRIES = "GET_COUNTRIES";
+export const GET_ACTIVITIES = "GET_ACTIVITIES";
 export const GET_NAMED_COUNTRY = "GET_NAMED_COUNTRY";
 export const ACT_TO_STATE = "ACT_TO_STATE";
+export const RESET_ACTIVITIES = "RESET_ACTIVITIES";
 
 
 // Dependencias Handlers
@@ -52,8 +54,3 @@ export const validate = (form) => {
 
 }
 
-export const validateAct = (array, obj) => {
-    
-
-
-}
