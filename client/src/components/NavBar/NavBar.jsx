@@ -2,19 +2,19 @@
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import './navBar.css';
+import style from './navBar.module.css';
 
 const NavBar = (props) => {
 
     const [isNavExpanded, setIsNavExpanded] = useState(false);
 
     return (
-        <nav className="navigation">
-            <div  className="brand-name">
+        <nav className={style.navigation}>
+            <div  className={style.brandName}>
                 <Link to={'/countries/inicio'}> <h1>Countries</h1> </Link>
             </div>
             <div>
-                <button className="hamburger" onClick={() => { setIsNavExpanded(!isNavExpanded) }}>
+                <button className={style.hamburger} onClick={() => { setIsNavExpanded(!isNavExpanded) }}>
                     <svg xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24" width="24px"
                         height="24px"><path
@@ -23,14 +23,14 @@ const NavBar = (props) => {
                 </button>
             </div>
             <div className={
-                isNavExpanded ? "navigation-menu expanded" : "navigation-menu"
+                isNavExpanded ? `${style.navigationMenu} ${style.expanded}` : style.navigationMenu
             }>
                 <ul>
                     <li>
-                        <Link to={'/countries/Inicio'}> <p>Inicio</p> </Link>
+                        <Link to={'/countries/Inicio'} onClick= {() => {setIsNavExpanded(!isNavExpanded)}}> <p>Inicio</p> </Link>
                     </li>
                     <li>
-                        <Link to={'/countries/form'}> <p>Crear actividad</p> </Link>
+                        <Link to={'/countries/form'} onClick= {() => {setIsNavExpanded(!isNavExpanded)}}> <p>Crear actividad</p> </Link>
                     </li>
                 </ul>
             </div>

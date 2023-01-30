@@ -21,14 +21,21 @@
     height: 100%;
     width: 100%;
     background-color: black;
-    opacity: .6;
+    opacity: .5;
     z-index: -1;
 }
 
-button{
-    height: 60px;
-    width: 60px;
-    border-radius:50%;
+.text{
+    color: #F9F7F7;
+    justify-self:start;
+}
+
+.button{
+    height: 40px;
+    width: 300px;
+    border-radius:15PX;
+    border: none;
+    font-size: 1em;
 }
 
 

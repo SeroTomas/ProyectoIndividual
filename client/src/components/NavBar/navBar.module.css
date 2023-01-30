@@ -7,40 +7,38 @@
     padding: 0.5rem 0rem;
     background-color: #fff;
     color: black;
-    box-shadow: 0 2px 2px 2px rgba(9, 9, 9, 0.23);
     max-width: 1500px;
     text-align: center;
     flex-grow: inherit;
 }
 
-
-.brand-name h1 {
+.brandName h1 {
     font-style: none;
     color: black;
     font-size: 1.7rem;
     margin-left: 1rem;
 }
 
-.brand-name a {
+.brandName a {
     text-decoration: none;
 }
 
-.navigation-menu input{
+.navigationMenu input{
     padding: 0.3rem;
 }
 
-.navigation-menu ul {
+.navigationMenu ul {
     display: flex;
     align-items: center;
     padding: 0;
 }
 
-.navigation-menu li {
+.navigationMenu li {
     list-style-type: none;
     margin: 0 1rem;
 }
 
-.navigation-menu li a {
+.navigationMenu li a {
     text-decoration: none;
     display: block;
     width: 100%;
@@ -69,7 +67,7 @@
         display: block;
     }
 
-    .navigation-menu ul {
+    .navigationMenu ul {
         position: absolute;
         top: 60px;
         left: 0;
@@ -81,27 +79,27 @@
         display: none;
     }
     
-    .navigation-menu.expanded ul {
+    .navigationMenu.expanded ul {
         display: block;  
     }
     
-    .navigation-menu li {
+    .navigationMenu li {
         text-align: center;
         margin: 0;
     }
 
-    .navigation-menu li a {
+    .navigationMenu li a {
         color: black;
         width: 100%;
         padding: 1.5rem 0;
     }
     
-    .navigation-menu input{
+    .navigationMenu input{
         padding: 0.3rem;
         margin: 1.2rem;
     }
 
-    .navigation-menu li:hover {
+    .navigationMenu li:hover {
         background-color: #eee;
     }
 

@@ -4,7 +4,7 @@ import SearchBar from '../SearchBar/SearchBar';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getCountries } from '../../redux/actions';
-import './inicio.css';
+import style from './inicio.module.css';
 
 const Inicio = (props) => {
 
@@ -18,7 +18,7 @@ const Inicio = (props) => {
     return (
 
 
-        <div className='inicio'>
+        <div className={style.inicio}>
             <SearchBar/>
             <Filters />
             <Cards />

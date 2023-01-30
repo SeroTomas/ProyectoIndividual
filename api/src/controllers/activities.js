@@ -11,7 +11,6 @@ getNewActivity = async (info) => {
             duration,
             season
         });
-        
 
         if (countries.length > 1) {
 
@@ -20,13 +19,12 @@ getNewActivity = async (info) => {
             });
 
         } else {
-
             await newActivity.addCountry(countries[0]);
-
         }
     });
 
     return info
+
 }
 
 getActivities = async () => {

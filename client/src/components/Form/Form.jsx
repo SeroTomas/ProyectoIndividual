@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { auxSortName, validate } from "../../Const";
-import { getCountries, getActToState, postActivity, resetActivities, getActivities } from "../../redux/actions";
+import { auxSortName, validate, postActivity } from "../../Const";
+import { getCountries, getActToState, resetActivities, getActivities } from "../../redux/actions";
 import ActivityCard from "../ActivityCard/ActivityCard";
+import style from './form.module.css';
 
 const Form = () => {
 
@@ -67,9 +68,9 @@ const Form = () => {
         }
         //buscamos si se esta tratando de cargar una actividad con mismo nombre
         let repeat = createActivities.filter(activity => activity.name === form.name);
-        //let repeatAct = activities.filter(activity => activity.name === form.name)
+        let repeatAct = activities.filter(activity => activity.name === form.name)
 
-        if (!repeat.length) {
+        if (!repeat.length && !repeatAct.length) {
             dispatch(getActToState(form))
             setForm(resetedForm)
         } else {
@@ -79,7 +80,8 @@ const Form = () => {
     }
     //cargamos las actividades a la base de datos
     const submitActivities = () => {
-        dispatch(postActivity(createActivities))
+        postActivity(createActivities)
+        
         dispatch(getActivities())
         dispatch(resetActivities())
     }
@@ -93,7 +95,7 @@ const Form = () => {
     }, [dispatch, form])
 
     return (
-        <>
+        <div className={style.gralContainer}>
             <div>
                 <form onSubmit={handlerSubmit}>
                     <label htmlFor="name">Nombre:
@@ -160,7 +162,7 @@ const Form = () => {
             </div>
 
 
-        </>
+        </div>
     )
 }
 

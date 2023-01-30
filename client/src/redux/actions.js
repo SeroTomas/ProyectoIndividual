@@ -26,17 +26,6 @@ export const getNamedCountry = (name) => {
     }
 };
 
-export const postActivity = (activity) => {
-    return async (dispatch) => {
-        try {
-           const response = await axios.post('http://localhost:3001/activities', activity)
-            return response;
-        } catch (error) {
-            console.log(error.message)
-        }
-    }
-}
-
 export const getActivities = () => {
     return async (dispatch) => {
         try {

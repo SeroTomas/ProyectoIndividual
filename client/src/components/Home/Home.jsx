@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios';
-import './home.css';
+import style from './home.module.css';
 
 
 const Home = (props) => {
@@ -13,9 +13,13 @@ const Home = (props) => {
     }, [])
 
     return (
-        <div className="contenedor">
-            <h1>Estoy en Home</h1>
-            <Link to={'/countries/inicio'}><button>Inicio</button></Link>
+        <div className={style.contenedor}>
+            <div className={style.text}>
+                <h1>Bienvenidos</h1>
+                <h1>a CountryApp</h1>
+                <h4>by Tomas Silverio</h4>
+            </div>
+            <Link to={'/countries/inicio'}><button className={style.button}>Iniciar aplicacion</button></Link>
         </div>
     )
 }

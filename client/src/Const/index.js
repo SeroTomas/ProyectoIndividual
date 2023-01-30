@@ -1,3 +1,5 @@
+import axios from "axios";
+
 // ****ACTIONS****
 export const GET_COUNTRIES = "GET_COUNTRIES";
 export const GET_ACTIVITIES = "GET_ACTIVITIES";
@@ -53,4 +55,14 @@ export const validate = (form) => {
     return error;
 
 }
+
+export const postActivity = async (activity) => {
+    try {
+        const response = await axios.post('http://localhost:3001/activities', activity)
+        return response;
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
 
