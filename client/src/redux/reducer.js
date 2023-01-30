@@ -27,10 +27,9 @@ export default function reducer(state = initialState, { type, payload }) {
             }
 
         case FILTER_BY_CONTINENT:
-
             return {
                 ...state,
-                continent: auxFilterContinent(state.dbCountries, payload)
+                countries: auxFilterContinent(state.dbCountries, payload)
             }
 
         case GET_NAMED_COUNTRY:

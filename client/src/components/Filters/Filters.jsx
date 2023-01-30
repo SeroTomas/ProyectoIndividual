@@ -51,7 +51,7 @@ const Filters = () => {
 
             <select onChange={handlerContinent}>
                 <option>Filtrar por continente</option>
-                <option value="all">All</option>
+                <option value="All">All</option>
                 <option value="North America">North America</option>
                 <option value="South America">South America</option>
                 <option value="Africa">Africa</option>

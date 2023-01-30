@@ -36,7 +36,7 @@ export const auxSortName = (a, b) => {
 }
 
 export const auxFilterContinent = (array, payload) => {
-    if (payload === "All") return []
+    if (payload === "All") return array
     return array.filter(country => country.continent === payload)
 
 }

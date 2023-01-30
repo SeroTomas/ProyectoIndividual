@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux"
 import { getNamedCountry } from "../../redux/actions";
 
 
-const SearchBar = () => {
+const SearchBar = ({resetPagination}) => {
 
     const dispatch = useDispatch()
     const [search, setSearch] = useState("");
@@ -20,6 +20,7 @@ const SearchBar = () => {
     const handlerInput = (event) => {
         let value = event.target.value;
         setSearch(value);
+        resetPagination(1)
     }
 
 
