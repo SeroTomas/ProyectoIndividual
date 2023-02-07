@@ -9,33 +9,37 @@ import style from './inicio.module.css';
 
 const Inicio = (props) => {
 
-    const countries = useSelector((state)=> state.countries);
+    const countries = useSelector((state) => state.countries);
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getCountries())
     }, [dispatch]);
 
+    // generamos la logica para el paginado
     const [currentPage, setCurrentPage] = useState(1);
     const lastCountry = currentPage * 10;
     const firstCountry = lastCountry - 10;
     const currentCountry = countries.slice(firstCountry, lastCountry);
 
-    const paginado = (pageNumber) => {
-        setCurrentPage(pageNumber);
-    }
-
     return (
-
-
         <div className={style.inicio}>
-            <SearchBar resetPagination = {setCurrentPage}/>
-            <Filters resetPagination = {setCurrentPage}/>
-            <Cards renderCountries = {currentCountry}/>
-            <Pagination 
-                countries = {countries.length}
-                paginado = {paginado}
-            />
+            <div className={style.filters}>
+                <Filters resetPagination={setCurrentPage} />
+            </div>
+            <div className={style.cards}>
+                <Pagination
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                    countries={countries.length}
+                />
+                <Cards renderCountries={currentCountry} />
+                <Pagination
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                    countries={countries.length}
+                />
+            </div>
         </div>
     )
 }

@@ -1,3 +1,35 @@
+
 .inicio{
-    max-width: 1500px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.filters{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    background-image: url('../../media/paises_transcontinentales.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    z-index: 1;
+}
+
+.filters::after{
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 300px;
+    background-color: black;
+    opacity: .3;
+    z-index: -1;
+}
+
+.cards{
+    position: relative;
+    margin: 50px 50px;
 }

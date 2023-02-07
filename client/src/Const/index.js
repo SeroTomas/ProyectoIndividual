@@ -4,14 +4,14 @@ import axios from "axios";
 export const GET_COUNTRIES = "GET_COUNTRIES";
 export const GET_ACTIVITIES = "GET_ACTIVITIES";
 export const GET_NAMED_COUNTRY = "GET_NAMED_COUNTRY";
+export const GET_DETAIL = "GET_DETAIL";
 export const ACT_TO_STATE = "ACT_TO_STATE";
+export const RESET_DETAIL = "RESET_DETAIL";
 export const RESET_ACTIVITIES = "RESET_ACTIVITIES";
-
-
-// Dependencias Handlers
 export const ORDER_BY_NAME = "ORDER_BY_NAME";
-export const ORDER_BY_POPULATION = "ORDER_BY_POPULATION"
-export const FILTER_BY_CONTINENT = "FILTER_BY_CONTINENT"
+export const ORDER_BY_POPULATION = "ORDER_BY_POPULATION";
+export const FILTER_BY_CONTINENT = "FILTER_BY_CONTINENT";
+export const FILTER_BY_ACTIVITIES = "FILTER_BY_ACTIVITIES";
 
 
 // dependencia de selectores
@@ -59,10 +59,26 @@ export const validate = (form) => {
 export const postActivity = async (activity) => {
     try {
         const response = await axios.post('http://localhost:3001/activities', activity)
-        return response;
     } catch (error) {
         console.log(error.message)
     }
 }
 
+export const auxFilterActivities = (continent, countries, payload) => {
+    if (!continent.length) {
+        if (payload === "all") return countries;
+        if (payload === "withActivities") {
+            return countries.filter(countries => countries.activities.length);
+        } else {
+            return countries.filter(countries => !countries.activities.length);
+        }
 
+    } else {
+        if (payload === "all") return continent;
+        if (payload === "withActivities") {
+            return continent.filter(countries => countries.activities.length);
+        } else {
+            return continent.filter(countries => !countries.activities.length);
+        }
+    }
+}

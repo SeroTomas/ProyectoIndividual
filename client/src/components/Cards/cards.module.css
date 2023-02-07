@@ -1,9 +1,7 @@
-.cards-container{
+.cardsContainer{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-}
-
-.filters-container option{
-    text-align: center;
+    max-width: 1200px;
+    gap: 15px;
 }

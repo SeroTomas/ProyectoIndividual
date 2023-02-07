@@ -1,20 +1,14 @@
+import { useSelector } from 'react-redux'
 import style from './pagination.module.css'
 
-const Pagination = ({countries, paginado }) => {
-    const pageNumbrers = []
-    for (let i = 1; i <= Math.ceil(countries / 10); i++) {
-        pageNumbrers.push(i)
-    }
+const Pagination = ({currentPage, setCurrentPage, countries }) => {
+
+    let pages = Math.ceil(countries / 10)
+
     return (
         <div className={style.paginadoContainer}>
-            <ul className={style.ul}>
-                {pageNumbrers &&
-                    pageNumbrers.map(number => (
-                        <li key={number}>
-                            <a className={style.numeroPaginado} href onClick={() => paginado(number)}> {number} </a>
-                        </li>
-                    ))}
-            </ul>
+            <button disabled = {currentPage === 1} onClick={() => {setCurrentPage(currentPage - 1)}}>Prev</button>
+            <button disabled = {currentPage === pages} onClick={() => {setCurrentPage(currentPage + 1)}}>Next</button>
         </div>
     )
 }

@@ -1,3 +1,5 @@
+import style from './searchBar.module.css'
+
 //dependencias 
 import { useEffect } from "react";
 import { useState } from "react";
@@ -20,20 +22,20 @@ const SearchBar = ({resetPagination}) => {
     const handlerInput = (event) => {
         let value = event.target.value;
         setSearch(value);
-        resetPagination(1)
     }
 
 
     useEffect(() => {
         dispatch(getNamedCountry(search))
+        resetPagination(1)
     }, [dispatch, search])
 
 
     return (
         <>
-            <div className="search-container">
+            <div className={style.container}>
                 <form onChange={handlerSearch} onSubmit={(event) => { event.preventDefault() }}>
-                    <input type="text" placeholder="Buscar..." onChange={handlerInput} value={search} />
+                    <input type="text" placeholder="Buscar" onChange={handlerInput} value={search} />
                 </form>
             </div>
         </>

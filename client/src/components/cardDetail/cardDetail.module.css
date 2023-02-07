@@ -1,0 +1,15 @@
+.detailContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.country{
+    display: flex;
+    flex-direction: row;
+}
+
+.activities{
+    display: flex;
+    flex-wrap: wrap;
+}

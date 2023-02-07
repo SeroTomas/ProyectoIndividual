@@ -1,4 +1,21 @@
-import { GET_ACTIVITIES,RESET_ACTIVITIES,ACT_TO_STATE,GET_COUNTRIES, GET_NAMED_COUNTRY, ORDER_BY_NAME, A_Z, ASCENDENTE, ORDER_BY_POPULATION, FILTER_BY_CONTINENT, auxSortPopulation, auxSortName, auxFilterContinent } from "../Const/index";
+import {
+    GET_ACTIVITIES,
+    RESET_ACTIVITIES,
+    ACT_TO_STATE,
+    GET_COUNTRIES,
+    GET_NAMED_COUNTRY,
+    ORDER_BY_NAME,
+    A_Z, ASCENDENTE,
+    ORDER_BY_POPULATION,
+    FILTER_BY_CONTINENT,
+    FILTER_BY_ACTIVITIES,
+    auxSortPopulation,
+    auxSortName,
+    auxFilterContinent,
+    auxFilterActivities,
+    GET_DETAIL,
+    RESET_DETAIL
+} from "../Const/index";
 
 
 
@@ -7,8 +24,8 @@ export const initialState = {
     countries: [],
     continent: [],
     createActivities: [],
-    activities : []
-
+    //activities: [],
+    detail: {}
 }
 
 export default function reducer(state = initialState, { type, payload }) {
@@ -20,38 +37,50 @@ export default function reducer(state = initialState, { type, payload }) {
                 countries: payload,
             }
 
-        case GET_ACTIVITIES:
-            return{
-                ...state,
-                activities:[...state.activities, payload]
-            }
-
-        case FILTER_BY_CONTINENT:
-            return {
-                ...state,
-                countries: auxFilterContinent(state.dbCountries, payload)
-            }
-
         case GET_NAMED_COUNTRY:
             return {
                 ...state,
                 countries: payload,
             }
 
+        // case GET_ACTIVITIES:
+        //     return {
+        //         ...state,
+        //         activities: payload
+        //     }
+
+        case GET_DETAIL:
+            return{
+                ...state,
+                detail: payload
+            }
+
+        case FILTER_BY_CONTINENT:
+            return {
+                ...state,
+                countries: auxFilterContinent(state.dbCountries, payload),
+                continent: auxFilterContinent(state.dbCountries, payload)
+            }
+
+        case FILTER_BY_ACTIVITIES:
+            return {
+                ...state,
+                countries: auxFilterActivities(state.continent,state.dbCountries, payload)
+            }
 
         case ORDER_BY_NAME:
             if (payload === A_Z) {
 
                 return {
                     ...state,
-                    countries: state.countries.slice().sort(auxSortName),
-                    continent: state.continent.slice().sort(auxSortName)
+                    countries: [...state.countries].sort(auxSortName),
+                    continent: [...state.continent].sort(auxSortName)
                 }
             } else {
                 return {
                     ...state,
-                    countries: state.countries.slice().sort(auxSortName).reverse(),
-                    continent: state.continent.slice().sort(auxSortName).reverse()
+                    countries: [...state.countries].sort(auxSortName).reverse(),
+                    continent: [...state.continent].sort(auxSortName).reverse()
 
                 }
             }
@@ -62,17 +91,17 @@ export default function reducer(state = initialState, { type, payload }) {
 
                 return {
                     ...state,
-                    countries: state.countries.slice().sort(auxSortPopulation),
-                    continent: state.continent.slice().sort(auxSortPopulation)
+                    countries: [...state.countries].sort(auxSortPopulation),
+                    continent: [...state.continent].sort(auxSortPopulation)
                 }
             } else {
                 return {
                     ...state,
-                    countries: state.countries.slice().sort(auxSortPopulation).reverse(),
-                    continent: state.continent.slice().sort(auxSortPopulation).reverse()
+                    countries: [...state.countries].sort(auxSortPopulation).reverse(),
+                    continent: [...state.continent].sort(auxSortPopulation).reverse()
                 }
             }
-        
+
         case ACT_TO_STATE:
             return {
                 ...state,
@@ -80,10 +109,16 @@ export default function reducer(state = initialState, { type, payload }) {
             }
 
         case RESET_ACTIVITIES:
-            return{
-                ...state, 
+            return {
+                ...state,
                 createActivities: []
             }
+
+        // case RESET_DETAIL:
+        //     return {
+        //         ...state,
+        //         detail: {}
+        //     }
 
         default:
             return {

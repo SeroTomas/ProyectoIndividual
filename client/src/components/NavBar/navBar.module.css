@@ -1,13 +1,18 @@
+.container{
+    display: flex;
+    justify-content: center;
+}
+
 .navigation {
-    height: 60px;
+    height: 90px;
     width: 100%;
     display: flex;
+    max-width: 1300px;
     align-items: center;
     justify-content: space-between;
     padding: 0.5rem 0rem;
     background-color: #fff;
     color: black;
-    max-width: 1500px;
     text-align: center;
     flex-grow: inherit;
 }
@@ -69,7 +74,7 @@
 
     .navigationMenu ul {
         position: absolute;
-        top: 60px;
+        top: 90px;
         left: 0;
         flex-direction: column;
         width: 100%;

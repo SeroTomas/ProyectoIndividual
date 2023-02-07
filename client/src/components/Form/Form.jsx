@@ -2,16 +2,14 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { auxSortName, validate, postActivity } from "../../Const";
 import { getCountries, getActToState, resetActivities, getActivities } from "../../redux/actions";
-import ActivityCard from "../ActivityCard/ActivityCard";
 import style from './form.module.css';
 
 const Form = () => {
 
     const dispatch = useDispatch();
     const dbCountries = useSelector(state => state.dbCountries).sort(auxSortName);
-    const createActivities = useSelector(state => state.createActivities)
     const activities = useSelector(state => state.activities)
-    console.log(activities)
+
     const resetedForm = {
         name: '',
         difficulty: '-',
@@ -19,10 +17,10 @@ const Form = () => {
         season: '-',
         countries: []
     }
+
     const [form, setForm] = useState(resetedForm)
-
-
     const [error, setError] = useState({})
+    const [country, setCountry] = useState([])
 
     const handlerInput = (event) => {
         let property = event.target.name;
@@ -67,11 +65,9 @@ const Form = () => {
             return alert('Debe llenar los campos')
         }
         //buscamos si se esta tratando de cargar una actividad con mismo nombre
-        let repeat = createActivities.filter(activity => activity.name === form.name);
-        let repeatAct = activities.filter(activity => activity.name === form.name)
-
-        if (!repeat.length && !repeatAct.length) {
-            dispatch(getActToState(form))
+        const repeat = country.filter(activity => activity.name === form.name);
+        if (!repeat.length) {
+            setCountry([...country, form])
             setForm(resetedForm)
         } else {
             alert('la actividad esta repetida o ya fue creada')
@@ -80,10 +76,11 @@ const Form = () => {
     }
     //cargamos las actividades a la base de datos
     const submitActivities = () => {
-        postActivity(createActivities)
-        
-        dispatch(getActivities())
-        dispatch(resetActivities())
+        //const repeatAct = activities.filter(activity => activity.name === form.name);
+
+
+        postActivity(country)
+        setCountry([])
     }
 
     useEffect(() => {
@@ -157,7 +154,9 @@ const Form = () => {
 
             <div>
                 <h2>actividades que quiere crear</h2>
-                <ActivityCard />
+                {
+                    country?.map(c=> <h2>{c.name}</h2>)
+                }
                 <button onClick={submitActivities}>Crear</button>
             </div>
 

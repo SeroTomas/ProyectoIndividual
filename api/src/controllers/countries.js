@@ -26,12 +26,19 @@ getCountries = async (name) => {
     if (name) {
         const nameCountry = await Country.findAll({
             where: { name: { [Op.iLike]: `%${name}%` } },
-            attributes: ['id', 'name', 'flag', 'continent', 'population']
+            attributes: ['id', 'name', 'flag', 'continent', 'population', 'capital']
         })
         return nameCountry;
     } else {
         const countries = await Country.findAll({
-            attributes: ['id', 'name', 'flag', 'continent', 'population']
+            attributes: ['id', 'name', 'flag', 'continent', 'population', 'capital'],
+            include: {
+                model: Activity,
+                attributes: ['id', 'name', 'difficulty', 'duration', 'season'],
+                through: {
+                    attributes: [],
+                }
+            }
         })
         return countries;
     }

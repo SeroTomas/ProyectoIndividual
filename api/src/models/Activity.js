@@ -13,7 +13,6 @@ module.exports = (sequelize) => {
         name: {
             type: DataTypes.STRING,
             allowNull: false,
-            unique:true
         },
         difficulty: {
             type: DataTypes.ENUM('muy facil', 'facil', 'normal', 'dificil', 'muy dificil')
